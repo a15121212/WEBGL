@@ -1994,13 +1994,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  3728272: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 3728333: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 3728397: function() {return Module.webglContextAttributes.powerPreference;},  
- 3728455: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 3728510: function($0) {performance.now = function() { return $0; };},  
- 3728558: function($0) {performance.now = function() { return $0; };},  
- 3728606: function() {performance.now = Module['emscripten_get_now_backup'];}
+  3728176: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 3728237: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 3728301: function() {return Module.webglContextAttributes.powerPreference;},  
+ 3728359: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 3728414: function($0) {performance.now = function() { return $0; };},  
+ 3728462: function($0) {performance.now = function() { return $0; };},  
+ 3728510: function() {performance.now = Module['emscripten_get_now_backup'];}
 };
 
 
@@ -13191,18 +13191,6 @@ var ASM_CONSTS = {
   }
   }
 
-  function _focusHandleAction(_name, _str){
-          if(UnityLoader.SystemInfo.mobile == true){
-              var _inputTextData = prompt("", Pointer_stringify(_str));
-              if (_inputTextData == null || _inputTextData == "") {
-                  //canceled text
-              } else {
-                  //send data to unity
-                  SendMessage(Pointer_stringify(_name), 'ReceiveInputData', _inputTextData);
-              }  
-          }
-      }
-
   function _getTempRet0() {
       return getTempRet0();
     }
@@ -16570,7 +16558,6 @@ var asmLibraryArg = {
   "fd_read": _fd_read,
   "fd_seek": _fd_seek,
   "fd_write": _fd_write,
-  "focusHandleAction": _focusHandleAction,
   "getTempRet0": _getTempRet0,
   "getaddrinfo": _getaddrinfo,
   "gethostbyaddr": _gethostbyaddr,
