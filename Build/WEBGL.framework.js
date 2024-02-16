@@ -1994,13 +1994,13 @@ var tempI64;
 // === Body ===
 
 var ASM_CONSTS = {
-  3724272: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
- 3724333: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
- 3724397: function() {return Module.webglContextAttributes.powerPreference;},  
- 3724455: function() {Module['emscripten_get_now_backup'] = performance.now;},  
- 3724510: function($0) {performance.now = function() { return $0; };},  
- 3724558: function($0) {performance.now = function() { return $0; };},  
- 3724606: function() {performance.now = Module['emscripten_get_now_backup'];}
+  3725904: function() {return Module.webglContextAttributes.premultipliedAlpha;},  
+ 3725965: function() {return Module.webglContextAttributes.preserveDrawingBuffer;},  
+ 3726029: function() {return Module.webglContextAttributes.powerPreference;},  
+ 3726087: function() {Module['emscripten_get_now_backup'] = performance.now;},  
+ 3726142: function($0) {performance.now = function() { return $0; };},  
+ 3726190: function($0) {performance.now = function() { return $0; };},  
+ 3726238: function() {performance.now = Module['emscripten_get_now_backup'];}
 };
 
 
@@ -2147,6 +2147,21 @@ var ASM_CONSTS = {
       if (Module['extraStackTrace']) js += '\n' + Module['extraStackTrace']();
       return demangleAll(js);
     }
+
+  function _CloseInputKeyboard()
+  	{
+  		document.getElementById("fixInput").blur();
+  	}
+
+  function _FixInputOnBlur()
+  	{
+  		SendMessage('_WebGLKeyboard', 'LoseFocus');
+  	}
+
+  function _FixInputUpdate() 
+  	{
+  		SendMessage('_WebGLKeyboard', 'ReceiveInputChange', document.getElementById("fixInput").value);
+  	}
 
   function _GetJSMemoryInfo(totalJSptr, usedJSptr) {
       if (performance.memory) {
@@ -4710,6 +4725,12 @@ var ASM_CONSTS = {
   		}
   
           requestOptions.timeout = timeout;
+  	}
+
+  function _OpenInputKeyboard(currentValue) 
+  	{
+  		document.getElementById("fixInput").value = Pointer_stringify(currentValue);
+  		document.getElementById("fixInput").focus();
   	}
 
   var webSocketInstances = [];
@@ -15996,6 +16017,9 @@ function checkIncomingModuleAPI() {
   ignoredModuleProp('fetchSettings');
 }
 var asmLibraryArg = {
+  "CloseInputKeyboard": _CloseInputKeyboard,
+  "FixInputOnBlur": _FixInputOnBlur,
+  "FixInputUpdate": _FixInputUpdate,
   "GetJSMemoryInfo": _GetJSMemoryInfo,
   "JS_Accelerometer_IsRunning": _JS_Accelerometer_IsRunning,
   "JS_Accelerometer_Start": _JS_Accelerometer_Start,
@@ -16080,6 +16104,7 @@ var asmLibraryArg = {
   "JS_WebRequest_SetRedirectLimit": _JS_WebRequest_SetRedirectLimit,
   "JS_WebRequest_SetRequestHeader": _JS_WebRequest_SetRequestHeader,
   "JS_WebRequest_SetTimeout": _JS_WebRequest_SetTimeout,
+  "OpenInputKeyboard": _OpenInputKeyboard,
   "SocketClose": _SocketClose,
   "SocketCreate": _SocketCreate,
   "SocketError": _SocketError,
